@@ -5,7 +5,8 @@ on:
     branches:
       - 'usb'
     paths:
-      - gpl_release.txt
+      - 'gpl_release.txt'
+      - '.github/workflows/manual-trigger.yml'
 
 jobs:
   build:
