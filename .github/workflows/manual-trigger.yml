@@ -1,11 +1,30 @@
 name: Manual Trigger Example
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'usb'
+    paths:
+      - gpl_release.txt
 
 jobs:
+  fetch_deps:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: source file
+      run: |
+        echo "source file"
+        source gpl_release.txt
+        echo "buildVersion=$buildVersion"
+        echo "buildNumber=$buildNumber"
+
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Print a message
       run: echo "This is a manual trigger example"
+      echo "buildVersion=$buildVersion"
+      echo "buildNumber=$buildNumber"
