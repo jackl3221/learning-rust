@@ -19,8 +19,8 @@ jobs:
 
     - name: Print a message
       run: |
-      echo "This is a manual trigger example"
-      echo "source file"
-      source gpl_release.txt
-      echo "buildVersion=$buildVersion"
-      echo "buildNumber=$buildNumber"
+        echo "This is a manual trigger example"
+        echo "source file"
+        source gpl_release.txt
+        echo "buildVersion=$buildVersion"
+        echo "buildNumber=$buildNumber"
