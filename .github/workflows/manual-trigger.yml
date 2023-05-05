@@ -9,6 +9,19 @@ on:
       - '.github/workflows/manual-trigger.yml'
 
 jobs:
+  fetch_deps:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: source me
+      run: |
+        echo "source me "
+        source gpl_release.txt
+        echo "buildVersion=$buildVersion"
+        echo "buildNumber=$buildNumber"
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +34,5 @@ jobs:
     - name: Print a message
       run: |
         echo "This is a manual trigger example"
-        echo "source file"
-        source gpl_release.txt
         echo "buildVersion=$buildVersion"
         echo "buildNumber=$buildNumber"
