@@ -36,3 +36,14 @@ jobs:
         echo "This is a manual trigger example"
         echo "buildVersion=$buildVersion"
         echo "buildNumber=$buildNumber"
+
+    - name: Upload file1
+      uses: actions/upload-artifact@v3
+      with:
+        name: test1
+        path: test1.txt
+
+    - name: Download file1
+      uses: actions/download-artifact@v3
+      with:
+        name: test1
