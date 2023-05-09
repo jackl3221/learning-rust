@@ -34,6 +34,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test1
+        path: test1.txt
 
     - name: Upload file2
       uses: actions/upload-artifact@v3
@@ -45,3 +46,4 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: test2
+        path: test2.txt
