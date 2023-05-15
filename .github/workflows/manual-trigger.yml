@@ -1,11 +1,49 @@
 name: Manual Trigger Example
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'usb'
+    paths:
+      - 'gpl_release.txt'
+      - '.github/workflows/manual-trigger.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Git clone the repository
+      uses: actions/checkout@v3
+      with:
+        lfs: 'true'
+        fetch-depth: 0
+
     - name: Print a message
-      run: echo "This is a manual trigger example"
+      run: |
+        echo "This is a manual trigger example"
+        echo "buildVersion=$buildVersion"
+        echo "buildNumber=$buildNumber"
+
+    - name: Upload file1
+      uses: actions/upload-artifact@v3
+      with:
+        name: test1
+        path: test1.txt
+
+    - name: Upload file2
+      uses: actions/upload-artifact@v3
+      with:
+        name: test2
+        path: test2.txt
+
+    - name: Download file1
+      uses: actions/download-artifact@v3
+      with:
+        name: test1
+        path: downloaded-files/test1.txt
+
+    - name: Download file2
+      uses: actions/download-artifact@v3
+      with:
+        name: test2
+        path: downloaded-files/test2.txt

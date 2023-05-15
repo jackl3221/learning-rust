@@ -1,0 +1,265 @@
+
+mkdir new_project
+cd new_project
+sudo git --bare init
+sudo chmod -R a+w objects/ refs/
+
+cd new_project
+git init
+git remote add origin jack@192.168.11.16:/git/Cavium_Networks
+git commit -m  "Init version"
+git push origin master
+
+.profile file add 
+export EDITOR="vim"
+###################################################################
+git setting
+
+git config --global core.editor vim
+git config --global core.status auto
+git config --global core.branch auto
+git config --global core.interactive auto
+git config --global core.diff auto
+
+git config --global user.name "Jack Leu"
+git config --global user.email jack.leu@wdc.com
+
+1. git tag -l --> watch tag
+
+xxxxx --> git log to check
+git tag -a v1.0.0 xxxxxxxx
+git push --tags 
+
+git add .
+git commit -a
+
+git tag -d v1.0.0
+git push origin :refs/tags/v1.0.0 
+
+
+ex:
+cd /git
+git clone --bare unic-lsp wdic-lsp
+server readme
+
+git clean -dfx
+git reset --hard HEAD 
+
+
+git reset --hard ORIG_HEAD 
+
+
+git reset --hard DNS-320_v2.02b01
+
+
+# Create a new branch and then push it back to server
+master> git checkout -b NewBranch DNS-320_2.02b2
+NewBranch> .....(edit and commit)
+NewBranch> git push origin RemoteNewBranchName
+
+/* check branch */
+git branch -r
+
+/* change to branch */
+git checkout -t origin/DNS-320_v2.02
+
+ 
+git push origin DNS-320_v2.02
+
+git checkout -- arm.6282
+
+
+##
+checkout branch :
+git checkout -t origin/DNS-320L_v1.00b05
+
+list branch:
+git branch -a
+
+delete branch:
+git push origin :LT4A-MR3
+
+#####
+remove folder
+git rm -r xxx
+
+
+rename
+git mv xxx ooo
+
+
+git clone 2.65.88.99:/git/unic
+http://2.65.88.99/cgit/unic/
+
+
+gpl clean :
+cd xxx
+git clean -dfx
+git checkout -- .
+
+git reset HEAD custom/module/WD/auto_firmware_upgrade/auto_fw.c 
+
+
+create patch
+git format-patch -1 986f79e8e7b794626973645218e6ffad1586
+
+>>>> 0001-KC-for-Hybrid-mode.patch
+
+apply patch
+git am 0001-KC-for-Hybrid-mode.patch
+git am --directory=linux-4.1.13_BBC 0001-netlink-Add-missing-goto-statement-to-netlink_insert.patch
+
+
+git am --abort
+
+##check in a new code
+ssh 2.65.88.99
+cd /git/00-gitbot
+vi pre-receive-ssh
+
+mark
+#if git diff "${old}" "${new}" | grep -qE '^+?(<<<<<|>>>>>)'; then
+#  msg_unresolved_conflict "$refname"
+#  exit 1
+#fi
+
+check in
+remark
+
+
+
+git rebase -i HEAD~2
+git push origin +branch_name
+
+�nignore 
+Stopped at 7482e0d... updated the gemspec to hopefully work better
+You can amend the commit now, with
+
+       git commit --amend
+       git rebase --continue
+
+
+git commit -amend 
+
+git cherry-pick
+
+git log v4.1.14..v4.1.18 > 1.txt
+
+
+git revert xxxxxxxx
+
+git blame xxx.c
+
+
+### merge code
+merge branch test_merge2
+git merge test_merge2 
+
+########### merge commit
+git rebase -i HEAD~X
+fixup .. reserve commit
+git push origin +branch_name
+
+## 
+git log --pretty=full
+
+
+git bisect start
+git bisect good commit-id
+git bisect bad  commit-id
+git bisect good
+git bisect bad
+git bisect reset
+
+
+
+git fetch
+git rebase master
+
+# modify commit
+git rebase -i 828d3ad04eb1220fb68003f1dd5b047c69740396
+git commit --amend --author="user1<user1@gmail.com>"
+git rebase --continue
+
+#############################################
+github sync
+jack.leu@inforich-corp.com
+git remote add upstream https://github.com/Quanta-Storage-Inc/starman_ir.git
+git fetch upstream                 # update local with upstream
+git diff HEAD..upstream/master    # see diffs between local and upstream/master (if there is no diff then both are in sync)
+git pull upstream master           # pull upstream's master into local branch
+git push origin HEAD               # push to your forked repo's remote branch
+
+#####################################################
+
+
+How to fixed : https change to ssh upload
+
+git remote set-url origin xxxxxxx
+
+git remote set-url origin  ssh://git@jira-git.wdmv.wdc.com:7999/kdp/kdp.git
+
+git remote set-url origin  ssh://git@jira-git.wdmv.wdc.com:7999/gza/gza.git
+
+git remote set-url origin  ssh://git@jira-git.wdmv.wdc.com:7999/~jack.leu_wdc.com/kdp_jack.git
+
+
+git remote set-url origin git@github.com:wdc-csbu/kdp.git
+git remote set-url origin git@github.com:wdc-csbu/gza.git
+######################################
+
+
+git rebase -i HEAD~2
+git push origin +branch_name
+
+modify commit:
+git commit --amend
+
+remove commit:
+local:
+git reset --hard HEAD~1
+
+remote:
+git push origin HEAD --force
+
+update time
+git commit --amend --no-edit --date "$(date)"
+
+##############################
+
+show tag info
+git show-ref --tags
+
+git stash
+git checkout master
+git stash pop
+
+##############################
+conflict
+git checkout -b new_branch
+git cherry-pick old commit
+modify conflict
+git add conflict file
+git cherry-pick --continue
+
+################
+git remote set-url origin git@github.com:wdc-csbu/kdp.git
+git branch KDP-4110_RND_Remove_default_samba_Public_and_TimeMachineBackup_share_and_folder_in_the_firmware-2 origin/master
+
+git checkout $BRANCH
+git commit -m "Update wd_kernel.txt from Jenkins build job" ${checkin_latest_kernel_version} || die "fail to commit wd_kernel.txt"
+git push origin $BRANCH || die "command \"push origin $BRANCH\" failed."
+git checkout -
+
+########################
+
+git lfs install
+
+git lfs track *.tar.gz
+git lfs track *.tar.xz
+
+git add .gitattributes
+git add *
+git commit -m "Add design file"
+git push origin main
+
