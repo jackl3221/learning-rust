@@ -23,6 +23,7 @@ jobs:
         echo "This is a manual trigger example"
         echo "buildVersion=$buildVersion"
         echo "buildNumber=$buildNumber"
+        ls
 
     - name: Upload file1
       uses: actions/upload-artifact@v3
