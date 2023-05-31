@@ -23,6 +23,7 @@ jobs:
         echo "This is a manual trigger example"
         out_date=$(date +%Y%m%d)
         echo "out_date=$out_date"
+        git checkout v1.0.0
 
     - name: Upload file1
       uses: actions/upload-artifact@v3
