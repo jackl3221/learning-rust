@@ -21,9 +21,8 @@ jobs:
     - name: Print a message
       run: |
         echo "This is a manual trigger example"
-        echo "buildVersion=$buildVersion"
-        echo "buildNumber=$buildNumber"
-        ls
+        out_date=$(date +%Y%m%d)
+        echo "out_date=$out_date"
 
     - name: Upload file1
       uses: actions/upload-artifact@v3
